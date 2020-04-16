@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="EXPIRES" content=="San, 12 Apr 2020 10:30:00 GMT">
+    <title>CREATIVE POWER</title>
+    <style> 
+
+	    *{font-family:Sans-Serif;margin:0;dding:0;}
+
+        @keyframes roll{
+            to{-webkit-transform:rotate(0deg);}
+            from{-webkit-transform:rotate(359deg);}
+        }   
+
+        @keyframes _{
+            89%{margin-left:0;}
+            90%{margin-left:90px;}
+            91%{margin-right:-150px;}
+            100%{margin-left:0;}
+        }
+
+        @keyframes __{
+            89%{margin-left:0;}
+            90%{margin-left:80px;}
+            91%{margin-left:-70px}
+            100%{margin-left:0;}
+        }
+
+        #glitch{
+		    position:fixed;
+            justify-content:space-around;
+            display:flex;
+		    top:0;
+		    left:0;
+            width:100vw;
+            height:100vh;
+        }
+
+        #wall{
+		    position:fixed;
+		    top:0;
+		    left:0;
+            width:100vw;
+            height:100%;
+            overflow:hidden;
+            background:url('./glitch.jpg');
+            background-size:100% 100%;
+            background-position:80% 10%;
+        }
+
+        #on_off{
+            position:absolute;
+			background:rgb(255, 254, 213) url('./PLAY.png') center 80% no-repeat;
+            border:none;
+			font-size:20px;
+			color:rgb(102, 99, 91);
+			left:5px;
+			text-align:center;
+			width:160px;
+			height:120px;
+			line-height:35px;
+            border-radius:5px;
+            padding:0;
+            cursor:pointer;
+			
+        }
+
+        #on_off::before{
+            display:block;
+            content:'VHS GLITCH FX';
+            position:relative;
+            border-bottom:1px black solid;
+            margin:auto;
+			width:160px;
+			height:10px;
+			line-height:0;
+			
+        }
+
+        #label{
+            justify-content:space-around;
+            display:flex;
+            position:absolute;
+			left:90px;
+			background:rgb(39, 39, 34);
+            border:none;
+			font-size:30px;
+			color:white;
+            margin:auto;
+			text-align:center;
+			width:170px;
+			height:120px;
+			line-height:35px;
+            cursor:pointer;
+            z-index:1;
+			
+        }
+
+        #label::before{
+            display:block;
+            content:'';
+            position:relative;
+            left:-85px;
+            width:120px;
+            height:120px;
+            background:rgb(255, 255, 255);
+            border-bottom-left-radius:120px;
+            border-top-left-radius:120px;
+            opacity:.4;
+        }
+
+        #label::after{
+            display:block;
+            content:'';
+            position:relative;
+            right:-85px;
+            width:120px;
+            height:120px;
+            background:rgb(255, 255, 255);
+            border-bottom-right-radius:120px;
+            border-top-right-radius:120px;
+            opacity:.4;
+        }
+
+        #wall item{
+            display:block;
+            width:100%;
+            height:1%;
+            margin:0;
+            padding:0;
+            background:url('./glitch.jpg');
+            background-size:100% 10000%;
+        }
+
+        #vhs{
+            justify-content:space-around;
+            display:flex;
+			position:relative;
+			top:-10vh;
+			margin:auto;
+            width:350px;
+            height:150px;
+            padding-top:20px;
+            border-top:20px solid rgb(90, 85, 85);
+            background:rgb(43, 39, 39);
+            border-radius:5px;
+            box-shadow:13px 10px rgb(241, 241, 40);
+        }
+
+        #vhs item{
+            display:block;
+            content:'';
+            position:relative;
+            margin-top:20px;
+            width:60px;
+            height:60px;
+            background:rgb(255, 255, 255);
+            border:10px grey dashed;
+            border-radius:120px;
+            -webkit-animation:roll 3s infinite linear;
+        }
+
+		@media only screen and (max-device-width:900px){
+
+		@media(orientation:portrait){
+
+		#wall item{
+		    background-size:200% 10000%;
+		}
+
+		#wall{
+		    background-size:200% 100%;
+		}
+		}
+		}
+    </style>
+</head>
+<body>
+  <div id="glitch">
+   <div id="wall" onclick="GLITCH(7)">
+      </div>
+      <div id="vhs">
+          <item></item>
+          <item></item>
+          <div id="label">
+      <button id="on_off" onclick="on_off()">PLAY</button>
+    </div>
+    </div>
+       </div>
+        <script>            
+		//------------------------------------ VHS GLITCH FX by art9creative : arttalantt@gmail.com --------->>
+        
+            var wall = document.getElementById('wall');
+            var vhs = document.getElementById('vhs');
+            var ON_OFF = document.getElementById('on_off');
+			var layers = 100;
+            var z = 0;            
+
+            function PLAY_PAUSE(nome, state){
+                ON_OFF.innerHTML=nome;
+                ON_OFF.style.backgroundImage="url('./"+nome+".png')";
+                vhs.children[0].style.animationPlayState = state;
+                vhs.children[1].style.animationPlayState = state;
+                for(i=0;i<layers;i++){
+                    wall.children[i].style.animationPlayState = state;
+                };
+                };
+
+            function GLITCH(f){
+                wall.innerHTML="";
+                for(i=0;i<layers;i++){
+                    wall.appendChild(document.createElement('item'));
+                    wall.children[i].style.backgroundPosition = '80% '+i+'%';
+                    wall.children[i].style.animation = '__ .'+f+i+'s infinite linear';
+                };
+                PLAY_PAUSE('PLAY', 'paused');
+                z=0;
+            };
+
+            GLITCH(7);
+                    
+            function on_off(){
+                z++;
+                if(z%2!=0){                   
+                    PLAY_PAUSE('PAUSE', 'running');
+                }else{ 
+                    PLAY_PAUSE('PLAY', 'paused');
+                    };
+            };           
+		//------------------------------------ VHS GLITCH FX by art9creative : arttalantt@gmail.com --------->>
+        </script>
+</body>
+</html>
